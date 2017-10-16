@@ -17,7 +17,7 @@ class CreateFormsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('options');
-            $table->string('owner');
+            $table->string('owner')->nullable();
             $table->timestamps();
         });
     }
