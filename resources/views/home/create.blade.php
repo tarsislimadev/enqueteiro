@@ -10,7 +10,7 @@
                     <h2>Enquete</h2>
                     <div class="form-group">
                         <label for="name">Título</label>
-                        <input type="text" class="form-control" name="title" placeholder="Nome" data-bind="value: name">
+                        <input type="text" class="form-control" name="title" placeholder="Nome" data-bind="value: title">
                     </div>
                     <div class="form-group">
                         <label>Opções</label>
@@ -39,9 +39,9 @@
                 </div>
                 <div class="col-md-4">
                     <h2>Visualização</h2>
-                    <iframe src="{{ route('iframe', ['id' => $form['id']]) }}" data-bind="attr: iframeAttributes"></iframe>
+                    <iframe id="iframe" src="{{ route('iframe', ['id' => $form['id']]) }}" data-bind="attr: iframeAttributes, visible: iframeVisible"></iframe>
 
-                    <a class="btn btn-default pull-right" href="#" role="button" data-bind="click: reload">
+                    <a class="btn btn-default" href="#" role="button" data-bind="click: reload">
                         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         Visualizar
                     </a>
@@ -63,30 +63,64 @@
 
 @section('scripts')
 <script>
+    var URL_SAVE = "{{ route('save') }}";
+    var URL_IFRAME = "{{ route('iframe', ['id' => $form['id']]) }}";
+    
     function ViewModel() {
         var self = this;
 
-        self.id = ko.observable();
-        self.name = ko.observable('{{ $form['title'] }}');
+        self.id = ko.observable("{{ $form['id'] }}");
+        self.title = ko.observable('{{ $form['title'] }}');
         self.options = ko.observableArray([
             ko.observable('Opção 1'), 
             ko.observable('Opção 2')
         ]);
-        self.optionsText = ko.computed(function () {
-            return ko.toJSON(self.options());
-        });
+        self.owner = ko.observable();
         
         self.iframe = ko.observable({
             width: ko.observable(300),
             height: ko.observable(200)
         });
+        self.iframeVisible = ko.observable(false);
         
         self.addOption = function () {
-            self.options.push(ko.observable());
+            self.options.push(ko.observable(''));
+        };
+        
+        self.save = function (callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', URL_SAVE, true);
+            
+            //xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementById('meta-csrf').attributes.content.value);
+            
+            xhr.onload = function () {
+                callback();
+            };
+            
+            xhr.onerror = function () {
+                callback(new Error('Erro inesperado.'));
+            };
+            
+            var fd = new FormData();
+            var options = self.options();
+            
+            fd.append('id', self.id());
+            fd.append('title', self.title());
+            for (var o in options) fd.append('options[]', options[o]());
+            fd.append('owner', self.owner());
+            
+            xhr.send(fd);
         };
         
         self.reload = function () {
-            debugger;
+            self.iframeVisible(true);
+            self.save(function (err) {
+                if (err) return err;
+                
+                document.getElementById('iframe').src = "";
+                document.getElementById('iframe').src = URL_IFRAME;
+            });
         };
         
         self.iframeAttributes = ko.computed(function () {

@@ -22,14 +22,10 @@ class HomeController extends Controller {
     public function save() {
         $form = \App\Form::query()->where('id', \request('id'))->first();
         $form->title = \request('title');
-        $form->title = \json_encode(\request('options'));
+        $form->options = \json_encode(\request('options'));
         $form->owner = \request('owner');
         
-        if ($form->save()) {
-            return view('home.saved');
-        }
-        
-        return 'Erro!';
+        $form->save();
     }
     
     public function iframe () {
@@ -40,9 +36,6 @@ class HomeController extends Controller {
     }
     
     public function send() {
-        return \redirect()->back()->withErrors([
-            'error' => 'Erro!'
-        ]);
     }
 
 }
