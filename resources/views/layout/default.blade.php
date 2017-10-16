@@ -31,7 +31,8 @@
             @yield('content')
 
             <footer class="footer">
-                <p>&copy; 2017 TL.</p>
+                <hr>
+                <p class="text-center">&copy; TL 2017</p>
             </footer>
 
         </div> <!-- /container -->
