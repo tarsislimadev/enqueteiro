@@ -13,5 +13,11 @@ mix.disableNotifications();
  |
  */
 
-mix.scripts('resources/assets/js/app.js', 'public/js/app.js')
+var scripts = [
+    'vendor/jquery.js', 
+    'vendor/knockout.js', 
+    'app.js'
+];
+
+mix.scripts(scripts.map(function (js) { return 'resources/assets/js/' + js }), 'public/js/app.js')
    .sass('resources/assets/sass/app.scss', 'public/css');
