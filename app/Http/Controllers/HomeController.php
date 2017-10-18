@@ -38,7 +38,7 @@ class HomeController extends Controller {
     public function send($id) {
         $option = \request('option');
         
-        if ($option == null || $option = '') {
+        if ($option == null || $option == '') {
             return \redirect()->back()->withErrors([
                 'error' => 'Selecione uma opção.'
             ]);
