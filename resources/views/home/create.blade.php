@@ -175,7 +175,7 @@
             iframe += 'src="{{ route('iframe', ['id' => $form['id']]) }}" ';
             iframe += 'width="' + self.iframe().width() + '" ';
             iframe += 'height="' + self.iframe().height() + '" ';
-            iframe += '';
+            iframe += 'frameBorder="0" style="border: 1px solid #000; border-radius:  5px" ';
             iframe += '></iframe>';
             
             return iframe;
