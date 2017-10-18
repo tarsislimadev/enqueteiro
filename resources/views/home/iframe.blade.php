@@ -3,10 +3,15 @@
 @section('author', $form['owner'])
 @section('description', $form['title'])
 
+@section('meta')
+<meta property="og:title" content="Criar enquetes" />
+<meta property="og:description" content="{{ $form['title'] }}" />
+@endsection
+
 @section('content')
 <form action="{{ route('send', ['id' => $form['id']]) }}" method="POST">
     {{ csrf_field() }}
-    
+
     <h1>{{ $form['title'] }}</h1>
     <small class="danger">{{ $errors->first() }}</small>
 
