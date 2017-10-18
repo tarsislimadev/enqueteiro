@@ -30,8 +30,7 @@ class HomeController extends Controller {
         $form->save();
     }
     
-    public function iframe () {
-        $id = \request('id');
+    public function iframe ($id) {
         $form = \App\Form::query()->where('id', $id)->first();
         
         return \view('home.iframe')->with('form', $form->toArray());
