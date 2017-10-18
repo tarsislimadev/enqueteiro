@@ -1,6 +1,6 @@
 @extends('layout.iframe')
 
 @section('content')
-<h1>Enviado</h1>
-<p>Obrigado por responder a essa enquete.</p>
+<h1>{{ $title }}</h1>
+<p>{{ $message }}</p>
 @endsection

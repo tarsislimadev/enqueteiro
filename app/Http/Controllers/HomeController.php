@@ -52,7 +52,10 @@ class HomeController extends Controller {
         
         $answer->save();
         
-        return view('home.answered');
+        return view('home.answered')->with([
+            'title' => 'Enviado', 
+            'message' => 'Obrigado por responder a essa enquete.'
+        ]);
     }
     
     public function about() {
