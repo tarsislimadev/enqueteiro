@@ -35,7 +35,24 @@ class HomeController extends Controller {
         return \view('home.iframe')->with('form', $form->toArray());
     }
     
-    public function send() {
+    public function send($id) {
+        $option = \request('option');
+        
+        if ($option == null || $option = '') {
+            return \redirect()->back()->withErrors([
+                'error' => 'Selecione uma opção.'
+            ]);
+        }
+        
+        $answer = new \App\Answer();
+        
+        $answer->form_id = $id;
+        $answer->option = $option;
+        $answer->ip = \request()->ip();
+        
+        $answer->save();
+        
+        return view('home.answered');
     }
 
 }
