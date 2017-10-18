@@ -28,24 +28,30 @@
                     <h2>Bloco</h2>
                     <div data-bind="with: iframe">
                         <div class="form-group">
-                            <label data-bind="text: 'Largura: ' + width() + 'px'">Largura</label>
+                            <label>Largura</label>
                             <input type="number" min="200" max="500" class="form-control" placeholder="Largura" data-bind="value: width">
                         </div>
                         <div class="form-group">
-                            <label data-bind="text: 'Altura ' + height() + 'px'">Altura</label>
+                            <label>Altura</label>
                             <input type="number" min="200" max="500" class="form-control" placeholder="Altura" data-bind="value: height">
                         </div>
                     </div>
+                    
+                    <h2>Script</h2>
+                    <p class="script-box" data-bind="text: script" data-bind="style: { width: iframe().width() }"></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Visualização</h2>
                     <p data-bind="text: iframeLoadingText"></p>
-                    <iframe id="iframe" src="{{ route('iframe', ['id' => $form['id']]) }}" data-bind="attr: iframeAttributes"></iframe>
+                    <iframe id="iframe" src="{{ route('iframe', ['id' => $form['id']]) }}" data-bind="attr: iframeAttributes" frameBorder="0" style="border: 1px solid #000; border-radius:  5px"></iframe>
 
-                    <a class="btn btn-default" href="#" role="button" data-bind="click: reload">
-                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        Visualizar
-                    </a>
+                    <p>
+                        <a class="btn btn-default" href="#" role="button" data-bind="click: reload">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                            Visualizar
+                        </a>
+                    </p>
+                    
                 </div>
             </div>
             <hr>
@@ -60,6 +66,16 @@
         </div>
     </div>
 </form>
+@endsection
+
+@section('styles')
+<style type="text/css">
+    .script-box {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+    }
+</style>
 @endsection
 
 @section('scripts')
@@ -152,6 +168,17 @@
                 width: self.iframe().width(),
                 height: self.iframe().height()
             };
+        });
+        
+        self.script = ko.computed(function () {
+            var iframe = '<iframe ';
+            iframe += 'src="{{ route('iframe', ['id' => $form['id']]) }}" ';
+            iframe += 'width="' + self.iframe().width() + '" ';
+            iframe += 'height="' + self.iframe().height() + '" ';
+            iframe += '';
+            iframe += '></iframe>';
+            
+            return iframe;
         });
     }
 </script>
