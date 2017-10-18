@@ -11,7 +11,7 @@
 
         <title>{{ \config('app.name') }}</title>
 
-        <link href="{{ \asset('css/app.css') }}" rel="stylesheet">
+        <link href="/css/app.css" rel="stylesheet">
         @yield('styles')
     </head>
 
@@ -38,7 +38,7 @@
 
         </div> <!-- /container -->
 
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="/js/app.js"></script>
         @yield('scripts')
 
     </body>
