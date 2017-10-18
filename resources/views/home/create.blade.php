@@ -37,8 +37,12 @@
                         </div>
                     </div>
                     
-                    <h2>Script</h2>
+                    <h2>Compartilhar</h2>
+                    <label>Script</label>
                     <p class="script-box" data-bind="text: script" data-bind="style: { width: iframe().width() }"></p>
+                    
+                    <label>Link</label>
+                    <p class="script-box">{{ route('iframe', ['id' => $form['id']]) }}</p>
                 </div>
                 <div class="col-md-4">
                     <h2>Visualização</h2>
