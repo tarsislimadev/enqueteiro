@@ -15,9 +15,9 @@
         <label>
             <input type="radio" name="option" value="{{ $id }}"> {{ $option }}
         </label>
-    </div>            
+    </div>
     @endforeach
 
-    <button type="submit" class="btn btn-success pull-right">Enviar</button>
+    <button type="submit" class="btn btn-default btn-block pull-right">Enviar</button>
 </form><!-- /container -->
 @endsection

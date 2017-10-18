@@ -19,7 +19,7 @@
                             <br>
                         </div>
                     </div>
-                    <a class="btn btn-default" href="#" role="button" data-bind="click: addOption">
+                    <a class="btn btn-default btn-block" href="#" role="button" data-bind="click: addOption">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         Adicionar opção
                     </a>
@@ -45,22 +45,13 @@
                     <p data-bind="text: iframeLoadingText"></p>
                     <iframe id="iframe" src="{{ route('iframe', ['id' => $form['id']]) }}" data-bind="attr: iframeAttributes" frameBorder="0" style="border: 1px solid #000; border-radius:  5px"></iframe>
 
-                    <p>
-                        <a class="btn btn-default" href="#" role="button" data-bind="click: reload">
-                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                            Visualizar
+                    <p id="button-reload">
+                        <a class="btn btn-default btn-block" href="#" role="button" data-bind="click: reload">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            Salvar e atualizar
                         </a>
                     </p>
                     
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-12">
-                    <a class="btn btn-default pull-right" href="#" role="button">
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        Salvar
-                    </a>
                 </div>
             </div>
         </div>
@@ -109,6 +100,8 @@
             document.getElementById('iframe').onload = function () {
                 self.iframeLoadingText(null);
             };
+            
+            self.iframe().width(document.getElementById('button-reload').offsetWidth);
         };
         
         self.addOption = function () {
@@ -144,7 +137,7 @@
         
         self.reload = function () {
             self.save(function (err) {
-                self.iframeLoadingText('Carregando...');
+                self.iframeLoadingText('Atualizando...');
                 if (err) {
                     self.iframeLoadingText(null);
                     return;
