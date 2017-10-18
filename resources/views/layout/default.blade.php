@@ -21,9 +21,9 @@
             <div class="header clearfix">
                 <nav>
                     <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active"><a href="#">Home</a></li>
-                        <li role="presentation"><a href="#">About</a></li>
-                        <li role="presentation"><a href="#">Contact</a></li>
+                        <li role="presentation" class="active"><a href="{{ route('home.index') }}">Início</a></li>
+                        <li role="presentation"><a href="{{ route('create') }}">Criar Enquete</a></li>
+                        <li role="presentation"><a href="{{ route('about') }}">Sobre</a></li>
                     </ul>
                 </nav>
                 <h3 class="text-muted">{{ \config('app.name') }}</h3>
