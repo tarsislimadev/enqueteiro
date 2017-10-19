@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="csrf-token" content="{{ csrf_token() }}" id="meta-csrf">
+        @yield('meta')
         <link rel="icon" href="/favicon.ico">
 
         <title>{{ \config('app.name') }}</title>
