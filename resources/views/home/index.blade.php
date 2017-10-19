@@ -4,7 +4,7 @@
 <div class="jumbotron text-center">
     <h1>Crie suas enquetes</h1>
     <p class="lead">de maneira rápida e prática.</p>
-    <p><a class="btn btn-lg btn-success" href="{{ route('create') }}" role="button">Vamos lá!</a></p>
+    <p><a class="btn btn-lg btn-primary" href="{{ route('create') }}" role="button">Vamos lá!</a></p>
 </div>
 
 <div class="row marketing">
