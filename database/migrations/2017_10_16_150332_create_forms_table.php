@@ -15,6 +15,7 @@ class CreateFormsTable extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('hash');
             $table->string('title');
             $table->string('options');
             $table->string('owner')->nullable();
