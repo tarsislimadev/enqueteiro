@@ -17,7 +17,7 @@ class FormsController extends Controller
 
         $form->save();
 
-        return \view('home.create')->with('form', $form->toArray());
+        return \view('forms.create')->with('form', $form->toArray());
     }
 
     public function save()
@@ -34,7 +34,7 @@ class FormsController extends Controller
     {
         $form = \App\Form::query()->where('hash', $hash)->first();
 
-        return \view('home.iframe')->with('form', $form->toArray());
+        return \view('forms.iframe')->with('form', $form->toArray());
     }
 
     public function send($hash)
@@ -57,7 +57,7 @@ class FormsController extends Controller
 
         $answer->save();
 
-        return view('home.answered')->with([
+        return view('forms.answered')->with([
                 'title' => 'Enviado',
                 'message' => 'Obrigado por responder a essa enquete.'
         ]);
