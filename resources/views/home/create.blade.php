@@ -13,7 +13,19 @@
                 <div class="form-group">
                     <label>Opções</label>
                     <div data-bind="foreach: options">
-                        <input type="text" class="form-control" name="options[]" placeholder="Opção" data-bind="value: text">
+                        <div data-bind="if: $parent.canRemoveOption()">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="options[]" placeholder="Opção" data-bind="value: text">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" data-bind="click: $parent.removeOption.bind($parent, $index()), if: $parent.canRemoveOption">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" data-bind="if: $parent.canRemoveOption"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div data-bind="if: !$parent.canRemoveOption()">
+                            <input type="text" class="form-control" name="options[]" placeholder="Opção" data-bind="value: text">
+                        </div>
                         <br>
                     </div>
                 </div>
@@ -84,7 +96,7 @@
         var self = this;
 
         self.hash = ko.observable("{{ $form['hash'] }}");
-        self.title = ko.observable('{{ $form['title'] }}');
+                self.title = ko.observable('{{ $form['title'] }}');
         self.options = ko.observableArray([
             new Option('Opção 1'),
             new Option('Opção 2')
@@ -107,6 +119,25 @@
 
         self.addOption = function () {
             self.options.push(new Option('Opção ' + (self.options().length + 1)));
+        };
+
+        self.canRemoveOption = function () {
+            return self.options().length > 2;
+        };
+
+        self.removeOption = function (index) {
+            var options = self.options(),
+                new_options = [];
+
+            for (var o in options) {
+                if (o == index) {
+                    continue;
+                }
+
+                new_options.push(options[o]);
+            }
+
+            self.options(new_options);
         };
 
         self.save = function (callback) {
@@ -132,10 +163,10 @@
             fd.append('title', self.title());
             for (var o in options) fd.append('options[]', options[o].text());
             fd.append('owner', self.owner());
-            
+
             xhr.send(fd);
         };
-        
+
         self.reload = function () {
             self.save(function (err) {
                 self.iframeLoadingText('Atualizando...');
