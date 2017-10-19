@@ -4,7 +4,7 @@
 @section('description', $form['title'])
 
 @section('meta')
-<meta property="og:title" content="Criar enquetes" />
+<meta property="og:title" content="{{ \config('app.name') }}" />
 <meta property="og:description" content="{{ $form['title'] }}" />
 @endsection
 
