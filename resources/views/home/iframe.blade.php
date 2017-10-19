@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('send', ['id' => $form['id']]) }}" method="POST">
+<form action="{{ route('send', ['hash' => $form['hash']]) }}" method="POST">
     {{ csrf_field() }}
 
     <h1>{{ $form['title'] }}</h1>

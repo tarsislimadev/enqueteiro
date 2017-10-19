@@ -13,7 +13,8 @@ class HomeController extends Controller {
     public function create() {
         $form = new \App\Form([
             'title' => 'Enquete', 
-            'options' => \json_encode(['Opção 1', 'Opção 2'])
+            'options' => \json_encode(['Opção 1', 'Opção 2']),
+            'hash' => \App\Utils\Str::unique(),
         ]);
         
         $form->save();
@@ -22,7 +23,7 @@ class HomeController extends Controller {
     }
     
     public function save() {
-        $form = \App\Form::query()->where('id', \request('id'))->first();
+        $form = \App\Form::query()->where('hash', \request('hash'))->first();
         $form->title = \request('title');
         $form->options = \json_encode(\request('options'));
         $form->owner = \request('owner');
@@ -30,13 +31,13 @@ class HomeController extends Controller {
         $form->save();
     }
     
-    public function iframe ($id) {
-        $form = \App\Form::query()->where('id', $id)->first();
+    public function iframe ($hash) {
+        $form = \App\Form::query()->where('hash', $hash)->first();
         
         return \view('home.iframe')->with('form', $form->toArray());
     }
     
-    public function send($id) {
+    public function send($hash) {
         $option = \request('option');
         
         if ($option == null || $option == '') {
@@ -44,10 +45,12 @@ class HomeController extends Controller {
                 'error' => 'Selecione uma opção.'
             ]);
         }
+
+        $form = \App\Form::query()->where('hash', $hash)->first();
         
         $answer = new \App\Answer();
         
-        $answer->form_id = $id;
+        $answer->form_id = $form->id;
         $answer->option = $option;
         $answer->ip = \request()->ip();
         
