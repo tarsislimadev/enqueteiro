@@ -12,7 +12,7 @@
     <div class="col-lg-4">
         @foreach($line as $form)
         <h4>{{ $form['title'] }}</h4>
-        <p><a href="{{ route('iframe', ['hash' => $form['hash']]) }}">responder</a></p>
+        <p><a href="{{ route('form', ['hash' => $form['hash']]) }}">responder</a></p>
 
         @endforeach
     </div>
