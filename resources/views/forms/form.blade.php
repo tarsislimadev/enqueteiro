@@ -1,7 +1,4 @@
-@extends('layout.iframe')
-
-@section('author', $form['owner'])
-@section('description', $form['title'])
+@extends('layout.default')
 
 @section('meta')
 <meta property="og:title" content="{{ \config('app.name') }}" />

@@ -30,16 +30,24 @@ class FormsController extends Controller
         $form->save();
     }
 
+    public function form($hash)
+    {
+        $form = \App\Form::query()->where('hash', $hash)->first();
+
+        return \view('forms.form')->with('form', $form->toArray())->with('iframe', false);
+    }
+
     public function iframe($hash)
     {
         $form = \App\Form::query()->where('hash', $hash)->first();
 
-        return \view('forms.iframe')->with('form', $form->toArray());
+        return \view('forms.iframe')->with('form', $form->toArray())->with('iframe', true);
     }
 
     public function send($hash)
     {
         $option = \request('option');
+        $iframe = \request('iframe');
 
         if ($option == null || $option == '') {
             return \redirect()->back()->withErrors([
@@ -59,7 +67,8 @@ class FormsController extends Controller
 
         return view('forms.answered')->with([
                 'title' => 'Enviado',
-                'message' => 'Obrigado por responder a essa enquete.'
+                'message' => 'Obrigado por responder a essa enquete.',
+                'iframe' => $iframe,
         ]);
     }
 }

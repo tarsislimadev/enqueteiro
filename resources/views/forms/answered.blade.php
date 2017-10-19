@@ -1,4 +1,4 @@
-@extends('layout.iframe')
+@extends($iframe ? 'layout.iframe' : 'layout.default');
 
 @section('content')
 <h1>{{ $title }}</h1>

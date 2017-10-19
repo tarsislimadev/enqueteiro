@@ -52,7 +52,7 @@
                 <p class="script-box" data-bind="text: script" data-bind="style: { width: iframe().width() }"></p>
 
                 <label>Link</label>
-                <p class="script-box">{{ route('iframe', ['hash' => $form['hash']]) }}</p>
+                <p class="script-box">{{ route('form', ['hash' => $form['hash']]) }}</p>
             </div>
             <div class="col-md-4">
                 <h2>Visualização</h2>
