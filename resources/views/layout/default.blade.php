@@ -21,12 +21,10 @@
             <div class="header clearfix">
                 <nav>
                     <ul class="nav nav-pills pull-right">
-                        <li role="presentation"><a href="{{ route('home.index') }}">Início</a></li>
                         <li role="presentation"><a href="{{ route('create') }}">Criar Enquete</a></li>
-                        <li role="presentation"><a href="{{ route('about') }}">Sobre</a></li>
                     </ul>
                 </nav>
-                <h3 class="text-muted">{{ \config('app.name') }}</h3>
+                <h3 class="text-muted"><a href="{{ route('home.index') }}">{{ \config('app.name') }}</a></h3>
             </div>
 
             @yield('content')
