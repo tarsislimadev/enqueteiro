@@ -39,11 +39,11 @@
                 <div data-bind="with: iframe">
                     <div class="form-group">
                         <label>Largura</label>
-                        <input type="number" min="200" max="500" class="form-control" placeholder="Largura" data-bind="value: width">
+                        <input type="number" min="200" max="500" class="form-control" placeholder="Largura" data-bind="value: width, valueUpdate: 'input'">
                     </div>
                     <div class="form-group">
                         <label>Altura</label>
-                        <input type="number" min="200" max="500" class="form-control" placeholder="Altura" data-bind="value: height">
+                        <input type="number" min="200" max="500" class="form-control" placeholder="Altura" data-bind="value: height, valueUpdate: 'input'">
                     </div>
                 </div>
 
