@@ -8,8 +8,8 @@
 </div>
 
 <div class="row marketing">
-    @foreach($forms->chunk(3) as $line)
-    <div class="col-lg-6">
+    @foreach($forms->chunk(4) as $line)
+    <div class="col-lg-4">
         @foreach($line as $form)
         <h4>{{ $form['title'] }}</h4>
         <p><a href="{{ route('iframe', ['hash' => $form['hash']]) }}">responder</a></p>
