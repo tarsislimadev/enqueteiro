@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('content')
-<div class="jumbotron">
+<div class="jumbotron text-center">
     <h1>Criar enquetes</h1>
     <p class="lead">Crie suas enquetes de maneira rápida e prática.</p>
     <p><a class="btn btn-lg btn-success" href="{{ route('create') }}" role="button">Começe agora</a></p>
