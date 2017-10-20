@@ -17,7 +17,7 @@ class CreateFormsTable extends Migration
             $table->increments('id');
             $table->string('hash');
             $table->string('title');
-            $table->string('options');
+            $table->string('answers');
             $table->string('owner')->nullable();
             $table->timestamps();
         });
