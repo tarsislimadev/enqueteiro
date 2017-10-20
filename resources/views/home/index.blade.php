@@ -1,5 +1,10 @@
 @extends('layout.default')
 
+@section('meta')
+<meta property="og:title" content="{{ \config('app.name') }}" />
+<meta property="og:description" content="Crie suas enquetes de maneira rápida e prática." />
+@endsection
+
 @section('content')
 <div class="jumbotron text-center">
     <h1>Crie suas enquetes</h1>
