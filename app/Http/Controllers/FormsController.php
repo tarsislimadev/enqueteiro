@@ -11,7 +11,7 @@ class FormsController extends Controller
     {
         $form = new \App\Form([
             'title' => 'Enquete',
-            'options' => \json_encode(['Opção 1', 'Opção 2']),
+            'answers' => \json_encode(['Opção 1', 'Opção 2']),
             'hash' => \App\Utils\Str::unique(),
         ]);
 
@@ -24,7 +24,7 @@ class FormsController extends Controller
     {
         $form          = \App\Form::query()->where('hash', \request('hash'))->first();
         $form->title   = \request('title');
-        $form->options = \json_encode(\request('options'));
+        $form->answers = \json_encode(\request('answers'));
         $form->owner   = \request('owner');
 
         $form->save();
@@ -46,12 +46,12 @@ class FormsController extends Controller
 
     public function send($hash)
     {
-        $option = \request('option');
+        $formAnswer = \request('answer');
         $iframe = \request('iframe');
 
-        if ($option == null || $option == '') {
+        if ($formAnswer == null || $formAnswer == '') {
             return \redirect()->back()->withErrors([
-                    'error' => 'Selecione uma opção.'
+                'error' => 'Selecione uma opção.'
             ]);
         }
 
@@ -60,7 +60,7 @@ class FormsController extends Controller
         $answer = new \App\Answer();
 
         $answer->form_id = $form->id;
-        $answer->option  = $option;
+        $answer->answer  = $formAnswer;
         $answer->ip      = \request()->ip();
 
         $answer->save();

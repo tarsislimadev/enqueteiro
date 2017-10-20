@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Form extends Model
 {
     protected $fillable = [
-        'title', 'options', 'hash', 'owner',
+        'title', 'answers', 'hash', 'owner',
     ];
 
     public function answers()

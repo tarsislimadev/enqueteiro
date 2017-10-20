@@ -12,10 +12,10 @@
     <h1>{{ $form['title'] }}</h1>
     <small class="danger">{{ $errors->first() }}</small>
 
-    @foreach(\json_decode($form['options']) as $id => $option)
+    @foreach(\json_decode($form['answers']) as $id => $answer)
     <div class="radio">
         <label>
-            <input type="radio" name="option" value="{{ $id }}"> {{ $option }}
+            <input type="radio" name="answer" value="{{ $id }}"> {{ $answer }}
         </label>
     </div>
     @endforeach

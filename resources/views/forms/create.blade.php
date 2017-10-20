@@ -12,24 +12,24 @@
                 </div>
                 <div class="form-group">
                     <label>Opções</label>
-                    <div data-bind="foreach: options">
-                        <div data-bind="if: $parent.canRemoveOption()">
+                    <div data-bind="foreach: answers">
+                        <div data-bind="if: $parent.canRemoveAnswer()">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="options[]" placeholder="Opção" data-bind="value: text">
+                                <input type="text" class="form-control" name="answers[]" placeholder="Opção" data-bind="value: text">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" data-bind="click: $parent.removeOption.bind($parent, $index()), if: $parent.canRemoveOption">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" data-bind="if: $parent.canRemoveOption"></span>
+                                    <button class="btn btn-default" type="button" data-bind="click: $parent.removeAnswer.bind($parent, $index()), if: $parent.canRemoveAnswer">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true" data-bind="if: $parent.canRemoveAnswer"></span>
                                     </button>
                                 </span>
                             </div>
                         </div>
-                        <div data-bind="if: !$parent.canRemoveOption()">
-                            <input type="text" class="form-control" name="options[]" placeholder="Opção" data-bind="value: text">
+                        <div data-bind="if: !$parent.canRemoveAnswer()">
+                            <input type="text" class="form-control" name="answers[]" placeholder="Opção" data-bind="value: text">
                         </div>
                         <br>
                     </div>
                 </div>
-                <a class="btn btn-default btn-block" href="#" role="button" data-bind="click: addOption">
+                <a class="btn btn-default btn-block" href="#" role="button" data-bind="click: addAnswer">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     Adicionar opção
                 </a>
@@ -86,7 +86,7 @@
 <script>
     var URL_SAVE = "{{ route('save') }}";
 
-    function Option(text) {
+    function Answer(text) {
         var self = this;
 
         self.text = ko.observable(text);
@@ -97,9 +97,9 @@
 
         self.hash = ko.observable("{{ $form['hash'] }}");
                 self.title = ko.observable('{{ $form['title'] }}');
-        self.options = ko.observableArray([
-            new Option('Opção 1'),
-            new Option('Opção 2')
+        self.answers = ko.observableArray([
+            new Answer('Opção 1'),
+            new Answer('Opção 2')
         ]);
         self.owner = ko.observable();
 
@@ -117,27 +117,27 @@
             self.iframe().width(document.getElementById('button-reload').offsetWidth);
         };
 
-        self.addOption = function () {
-            self.options.push(new Option('Opção ' + (self.options().length + 1)));
+        self.addAnswer = function () {
+            self.answers.push(new Answer('Opção ' + (self.answers().length + 1)));
         };
 
-        self.canRemoveOption = function () {
-            return self.options().length > 2;
+        self.canRemoveAnswer = function () {
+            return self.answers().length > 2;
         };
 
-        self.removeOption = function (index) {
-            var options = self.options(),
-                new_options = [];
+        self.removeAnswer = function (index) {
+            var answers = self.answers(),
+                new_answers = [];
 
-            for (var o in options) {
+            for (var o in answers) {
                 if (o == index) {
                     continue;
                 }
 
-                new_options.push(options[o]);
+                new_answers.push(answers[o]);
             }
 
-            self.options(new_options);
+            self.answers(new_answers);
         };
 
         self.save = function (callback) {
@@ -157,11 +157,11 @@
             };
 
             var fd = new FormData();
-            var options = self.options();
+            var answers = self.answers();
 
             fd.append('hash', self.hash());
             fd.append('title', self.title());
-            for (var o in options) fd.append('options[]', options[o].text());
+            for (var o in answers) fd.append('answers[]', answers[o].text());
             fd.append('owner', self.owner());
 
             xhr.send(fd);
