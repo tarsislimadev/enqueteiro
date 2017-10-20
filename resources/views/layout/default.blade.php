@@ -30,6 +30,8 @@
 
             @yield('content')
 
+            <br>
+            <h3>Publicidade</h3>
             <div class="row">
                 <div class="col-md-3">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
