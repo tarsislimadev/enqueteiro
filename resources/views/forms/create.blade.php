@@ -72,20 +72,8 @@
 </div>
 @endsection
 
-@section('styles')
-<style type="text/css">
-    .script-box {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-    }
-</style>
-@endsection
-
 @section('scripts')
 <script>
-    var URL_SAVE = "{{ route('save') }}";
-
     function Answer(text) {
         var self = this;
 
@@ -144,7 +132,7 @@
             self.iframeLoadingText('Salvando...');
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', URL_SAVE, true);
+            xhr.open('POST', "{{ route('save') }}", true);
 
             xhr.setRequestHeader('X-CSRF-TOKEN', document.getElementById('meta-csrf').attributes.content.value);
 
