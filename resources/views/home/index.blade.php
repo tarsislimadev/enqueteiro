@@ -17,7 +17,13 @@
     <div class="col-lg-4">
         @foreach($line as $form)
         <h4>{{ $form['title'] }}</h4>
-        <p><a href="{{ route('form', ['hash' => $form['hash']]) }}">responder</a></p>
+        <small>
+            <a href="{{ route('form', ['hash' => $form['hash']]) }}">responder</a>
+            |
+            <a href="{{ route('view', ['hash' => $form['hash']]) }}">ver dados</a>
+            |
+            <a href="{{ route('view', ['hash' => $form['hash']]) }}#share">compartilhar</a>
+        </small>
 
         @endforeach
     </div>

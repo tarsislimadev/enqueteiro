@@ -71,4 +71,16 @@ class FormsController extends Controller
                 'iframe' => $iframe,
         ]);
     }
+
+    public function view($hash) {
+        $form = \App\Form::query()->where('hash', $hash)->first();
+
+        $answers = \App\Answer::query()
+            ->where('form_id', $form->id)
+            ->selectRaw('answer, count(*) as sum')
+            ->groupBy('answer')
+            ->get();
+
+        return view('forms.view')->with('form', $form)->with('answers', $answers);
+    }
 }
