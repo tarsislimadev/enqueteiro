@@ -39,11 +39,17 @@
                 <div data-bind="with: iframe">
                     <div class="form-group">
                         <label>Largura</label>
-                        <input type="number" min="200" max="500" class="form-control" placeholder="Largura" data-bind="value: width, valueUpdate: 'input'">
+                        <div class="input-group">
+                            <input type="number" min="200" max="500" class="form-control text-right" placeholder="Largura" data-bind="value: width, valueUpdate: 'input'">
+                            <span class="input-group-addon" id="basic-addon3">px</span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Altura</label>
-                        <input type="number" min="200" max="500" class="form-control" placeholder="Altura" data-bind="value: height, valueUpdate: 'input'">
+                        <div class="input-group">
+                            <input type="number" min="200" max="500" class="form-control text-right" placeholder="Altura" data-bind="value: height, valueUpdate: 'input'">
+                            <span class="input-group-addon" id="basic-addon3">px</span>
+                        </div>
                     </div>
                 </div>
 
