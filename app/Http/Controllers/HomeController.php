@@ -20,4 +20,14 @@ class HomeController extends Controller {
         return view('home.about');
     }
 
+    public function clear() {
+        $_30minutesAgo = \Carbon\Carbon::now()->subMinute(30);
+
+        \App\Form::query()
+            ->where('title', 'Enquete')
+            ->where('created_at', '<', $_30minutesAgo)
+            ->whereRaw('forms.created_at = forms.updated_at')
+            ->delete();
+    }
+
 }

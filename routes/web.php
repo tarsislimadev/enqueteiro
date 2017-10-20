@@ -2,6 +2,7 @@
 
 Route::get('/', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 Route::get('about', ['as' => 'about', 'uses' => 'HomeController@about']);
+Route::get('clear', ['as' => 'clear', 'uses' => 'HomeController@clear']);
 
 Route::get('create', ['as' => 'create', 'uses' => 'FormsController@create']);
 Route::post('save', ['as' => 'save', 'uses' => 'FormsController@save']);
