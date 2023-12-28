@@ -2,16 +2,14 @@ version: '3'
 
 services:
 
+  database:
+    hostname: database
+    build: './src/database'
+
   app:
     hostname: app
     build: './src/app'
+    volumes:
+      - './src/app:/app'
     ports:
       - '8080:80'
-
-  docker-push:
-    image: 'tmvdl/projects:enqueteiro'
-    build: './src/app'
-
-  github-release:
-    image: 'github-release'
-    build: './src'
