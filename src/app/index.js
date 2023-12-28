@@ -6,4 +6,4 @@ server.get('/', (_, res) => res.setJSON({}))
 
 server.post('/', (_, res) => res.setJSON({}))
 
-server.listen(80)
+server.listen('80')
