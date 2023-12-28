@@ -5,6 +5,8 @@ services:
   database:
     hostname: database
     build: './src/database'
+    ports:
+      - '5432:5432'
 
   app:
     hostname: app
@@ -13,3 +15,7 @@ services:
       - './src/app:/app'
     ports:
       - '8080:80'
+    environment:
+      - 'POSTGRES_PASSWORD:app'
+      - 'POSTGRES_USER:app'
+      - 'POSTGRES_DB:app'
