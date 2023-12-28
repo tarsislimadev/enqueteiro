@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /i/
+Disallow: /send/
