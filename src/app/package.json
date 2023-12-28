@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./index.js "
+    "start": "node . "
   },
   "license": "MIT",
   "dependencies": {
-    "@brtmvdl/backend": "^1.0.10"
+    "@brtmvdl/backend": "^1.0.13"
   }
 }
