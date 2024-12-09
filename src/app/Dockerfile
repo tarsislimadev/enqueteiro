@@ -6,4 +6,4 @@ COPY . .
 
 RUN ./install.sh
 
-CMD php artisan serve
+CMD php artisan serve --host=0.0.0.0
