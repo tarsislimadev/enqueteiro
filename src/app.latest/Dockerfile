@@ -1,5 +1,9 @@
-FROM tmvdl/php:composer
+FROM php:7
 
 WORKDIR /app
 
 COPY . .
+
+RUN ./install.sh
+
+CMD php artisan serve
